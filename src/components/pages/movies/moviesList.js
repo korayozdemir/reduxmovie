@@ -7,14 +7,14 @@ function moviesList({ movies }) {
 
             {
                 movies.map(movies => (
-                    <Card style={{ width: '18rem' }}>
+                    <Card key={movies.id} style={{ width: '18rem' }}>
                         <Card.Img variant="top" src="https://productimages.hepsiburada.net/s/11/375-375/9038762311730.jpg" />
                         <Card.Body>
                             <Card.Title>{movies.title}</Card.Title>
                             <Card.Text>
                                 {movies.desc}
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Button variant="primary">Güncelle</Button>
                         </Card.Body>
                     </Card>
 
