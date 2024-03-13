@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function moviesList({ movies }) {
     return (
         <>
-
             {
                 movies.map(movies => (
                     <Card key={movies.id} style={{ width: '18rem' }}>
@@ -14,15 +14,12 @@ function moviesList({ movies }) {
                             <Card.Text>
                                 {movies.desc}
                             </Card.Text>
-                            <Button variant="primary">Güncelle</Button>
+                            <Button as={Link} to={`/movies/${movies.id}`} variant="primary">Güncelle</Button>
                         </Card.Body>
                     </Card>
 
                 ))
             }
-
-
-
         </>
     )
 }

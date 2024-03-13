@@ -25,9 +25,10 @@ function App() {
         </Row>
         <Row>
           <Routes>
-            <Route path='/' element={<HomePage />}></Route>
             <Route path='/movies' element={<MovieList />}></Route>
             <Route path='/movies/new' element={<MovieAdd />}></Route>
+            <Route path='/movies/:id' element={<MovieAdd />}></Route>
+            <Route path='/' element={<HomePage />}></Route>
           </Routes>
         </Row>
         <Row>
