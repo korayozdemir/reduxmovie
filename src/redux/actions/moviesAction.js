@@ -20,6 +20,7 @@ export function getMovies() {
 
 
 export function getMoviesById(movieId) {
+    debugger;
     let url = "http://localhost:3004/movies/" + movieId;
     return dispatch => {
         dispatch({
@@ -31,7 +32,6 @@ export function getMoviesById(movieId) {
 
 
 export function addMovie(movie) {
-    debugger;
     let url = "http://localhost:3004/movies";
     const requestOptions = {
         method: 'POST',
@@ -41,6 +41,22 @@ export function addMovie(movie) {
     return dispatch => {
         dispatch({
             type: actionTypes.ADD_MOVIES,
+            payload: fetch(url, requestOptions).then(response => console.log(response.json()))
+        })
+    }
+} 
+
+
+export function updateMovie(movie) {
+    let url = "http://localhost:3004/movies/" + movie.id;
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(movie)
+    }
+    return dispatch => {
+        dispatch({
+            type: actionTypes.UPDATE_MOVIES,
             payload: fetch(url, requestOptions).then(response => console.log(response.json()))
         })
     }

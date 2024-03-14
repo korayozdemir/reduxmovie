@@ -2,6 +2,7 @@ import initialState from './initialState'
 import * as actionTypes from '../actions/actionTypes'
 
 export default function moviesAddReducer(state = initialState, action) {
+    debugger;
     switch (action.type) {
         case actionTypes.ADD_MOVIES:
 

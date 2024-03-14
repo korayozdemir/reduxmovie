@@ -7,7 +7,6 @@ import * as moviesActions from '../../../redux/actions/moviesAction'
 class index extends Component {
     componentDidMount() {
         this.props.actions.getMovies();
-        debugger;
     }
 
     render() {
