@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux'
 import * as moviesActions from '../../../redux/actions/moviesAction'
 import { useParams } from 'react-router-dom'
 
-function withParam(Component){
-    return props => <Component {...props} params={useParams()}/>
+function withParam(Component) {
+    return props => <Component {...props} params={useParams()} />
 }
 
 class movieAdd extends Component {
@@ -16,23 +16,32 @@ class movieAdd extends Component {
     }
 
     componentDidMount() {
-        debugger;
-        var xxx = this.props.params;
-        this.props.actions.getMovie(this.props.params);
+        let { id } = this.props.params
+        this.props.actions.getMovie(id);
     }
 
-    componentWillReceiveProps(testProps){
-        debugger;
+    componentWillReceiveProps(testProps) {
+        if (testProps.movie) {
+            this.setState({
+                id: testProps.movie.id,
+                title: testProps.movie.title,
+                desc: testProps.movie.desc
+            })
+        }
     }
 
     onSubmit = (event) => {
-        debugger;
-        this.props.actions.addMovies(this.state);
+        if (this.props.movie) {
+            this.props.actions.updateMovie(this.state);
+        }
+        else {
+            this.props.actions.addMovies(this.state);
+        }
+
     }
 
-   
+
     handleChange = (e) => {
-        debugger;
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value })
     }
@@ -70,7 +79,8 @@ class movieAdd extends Component {
 
 function mapStatetoProps(state, props) {
     return {
-        movies: state.moviesListReducer.movies
+        movies: state.moviesListReducer.movies,
+        movie: state.moviesReducers.movie
     };
 }
 
@@ -79,7 +89,8 @@ function mapDispatchtoProps(dispatch) {
     return {
         actions: {
             addMovies: bindActionCreators(moviesActions.addMovie, dispatch),
-            getMovie: bindActionCreators(moviesActions.getMoviesById, dispatch)
+            getMovie: bindActionCreators(moviesActions.getMoviesById, dispatch),
+            updateMovie: bindActionCreators(moviesActions.updateMovie, dispatch)
         }
     }
 }
